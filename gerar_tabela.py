@@ -7,7 +7,7 @@ def gerar_estados():
     #tokens
     estados = ["TK_ID", "TK_NUMERO", "TK_MOEDA", "TK_CADEIA", "TK_RESERVADA",
             "TK_COMENTARIO", "TK_OP_GE", "TK_OP_LE", "TK_OP_MAIOR", 
-            "TK_OP_MENOR", "TK_OP_IGUAL", "TK_OP_DIF", "TK_OP_IGUAL",
+            "TK_OP_MENOR", "TK_OP_IGUAL", "TK_OP_DIF",
             "TK_OP_SOMA", "TK_OP_SUB", "TK_OP_MULT", "TK_OP_DIV",
             "TK_OP_OU", "TK_OP_E", "TK_OP_NEGACAO", "TK_OP_ATRIBUICAO",
             "TK_ABRE_PARENTESE", "TK_FECHA_PARENTESE", "TK_VIRGULA"]
@@ -15,8 +15,6 @@ def gerar_estados():
     #estados
     for x in range (0,25):
         estados.append('q'+ str(x))
-    #rejeicao
-    estados.append("TK_REJEICAO")
     return [estados, estados_acc]
 
 def gerar_inputs():
@@ -33,9 +31,8 @@ def gerar_inputs():
     return inputs
 
 
-def criar_tabela(inputs, estados, padrao):
-    
-    data = [[padrao] * len(inputs) for _ in range(len(estados))]
+def criar_tabela(inputs, estados):
+    data = [[pd.NaN] * len(inputs) for _ in range(len(estados))]
     tabela_transicao = pd.DataFrame(data, index=estados, columns=inputs)
     return tabela_transicao
 
@@ -70,7 +67,7 @@ def preencher_tabela(tabela_transicao):
     #q1
     tabela_transicao.loc["q1", :]= 'q1'
     tabela_transicao.loc["q1", '"']= 'TK_CADEIA'
-    tabela_transicao.loc["q1", '\n']= 'TK_REJEICAO'
+    tabela_transicao.loc["q1", '\n']= pd.NaN
     #q2
     tabela_transicao.loc["q2", 'a':'z']= 'q3'
     #q3
@@ -150,9 +147,9 @@ def gerar_csv(tabela):
 def gerar_tabela():
     estados, estados_acc = gerar_estados()
     inputs = gerar_inputs()
-    tabela_transicao = criar_tabela(inputs, estados, "TK_REJEICAO")
+    tabela_transicao = criar_tabela(inputs, estados)
     preencher_tabela(tabela_transicao)
-    gerar_csv(tabela_transicao)
+    # gerar_csv(tabela_transicao)
     return tabela_transicao, estados_acc
 
 
