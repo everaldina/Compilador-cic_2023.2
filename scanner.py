@@ -40,20 +40,25 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
     dic_rsv = {"programa": "TK_PROG", "fim_programa": "TK_FPROG", "se": "TK_SE", 
                "entao": "TK_ENTAO", "imprima": "TK_IMPRIMA", "leia": "TK_LEIA", "enquanto": "TK_ENQUANTO"}
     palavra_rsv = list(dic_rsv.keys())
+    input = list(tbl_transicao.columns.values)
+    input.remove('outro')
     
     while(1):
         char = arquivo.read(1)
         if not char:
             return 'EOF', None, None
+        if char not in input:
+            char = 'outro'
+        print(estado_att, char)
         estado_att = tbl_transicao.at[estado_att, char]
-        lexema.append(char)
+        lexema = lexema + char
         posicao+=1
         if (estado_att in estados_acc) and (estado_att not in lista_retroceder):
             return estado_att, lexema, posicao
         elif (estado_att in estados_acc) and (estado_att in lista_retroceder):
-            lexema.pop()
+            lexema = lexema[:len(lexema)-1]
             posicao-=1
-            arquivo.seek(-1, 1) #retroceder o arquivo
+            arquivo.seek(posicao) #retroceder o arquivo
             if estado_att == 'TK_RESERVADO':
                 if lexema in palavra_rsv:
                     return dic_rsv[lexema], lexema, posicao       
@@ -61,6 +66,9 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
                     return None, lexema, posicao
             else:
                 return estado_att, lexema, posicao
+            
+fim = scanner('ex1.cic')
+fim.to_csv("v1.csv", sep=";", index=True, header=True)
 
 
     

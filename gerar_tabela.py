@@ -25,7 +25,7 @@ def gerar_inputs():
         inputs.append(chr(x))
     for x in range(0, 10):
         inputs.append(str(x))
-    inputs.extend(["(", ")", ",", "+", "-", "*", "/", ">", "<", "=", "!",
+    inputs.extend(["(", ")", ",", "+", "-", "*", "/", ">", "<", "=", "!", "_",
                 " ", "\n", "\t", "$", '"', "'", ".", ":", '~', '|', "&", "#",
                 "outro"])
     return inputs
@@ -73,6 +73,7 @@ def preencher_tabela(tabela_transicao):
     #q3
     tabela_transicao.loc["q3", 'A':'Z']= 'TK_RESERVADA'
     tabela_transicao.loc["q3", 'a':'z']= 'q3'
+    tabela_transicao.at["q3", '_']= 'q3'
     tabela_transicao.loc["q3", '0':'outro']= 'TK_RESERVADA'
     #q4
     tabela_transicao.loc["q4", :]= 'TK_OP_MAIOR'
