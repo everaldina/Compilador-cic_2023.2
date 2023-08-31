@@ -13,7 +13,7 @@ def gerar_estados():
             "TK_ABRE_PARENTESE", "TK_FECHA_PARENTESE", "TK_VIRGULA"]
     estados_acc = estados.copy()
     #estados
-    for x in range (0,25):
+    for x in range (0,26):
         estados.append('q'+ str(x))
     return [estados, estados_acc]
 
@@ -123,7 +123,8 @@ def preencher_tabela(tabela_transicao):
     tabela_transicao.loc["q18", "'"] = "q19"
     #q19
     tabela_transicao.loc["q19", :] = "q19"
-    tabela_transicao.loc["q19", "'"] = "q20"
+    tabela_transicao.at["q19", "'"] = "q20"
+    tabela_transicao.at["q19", "\n"] = "q25"
     #q20
     tabela_transicao.loc["q20", :] = "q19"
     tabela_transicao.loc["q20", "'"] = "q21"
@@ -140,6 +141,9 @@ def preencher_tabela(tabela_transicao):
     #q24
     tabela_transicao.loc["q24", "a":"9"] = "q24"
     tabela_transicao.loc["q24", ">"] = "TK_ID"
+    #q25
+    tabela_transicao.loc["q25", :] = "q19"
+    tabela_transicao.at["q25", "'"] = "q20"
 
 def gerar_csv(tabela):
     tabela.to_csv("tabela_transicao.csv", sep=";", index=True, header=True)
