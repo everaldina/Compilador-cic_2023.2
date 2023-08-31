@@ -32,7 +32,7 @@ def gerar_inputs():
 
 
 def criar_tabela(inputs, estados):
-    data = [[pd.NaN] * len(inputs) for _ in range(len(estados))]
+    data = [[None] * len(inputs) for _ in range(len(estados))]
     tabela_transicao = pd.DataFrame(data, index=estados, columns=inputs)
     return tabela_transicao
 
@@ -67,7 +67,7 @@ def preencher_tabela(tabela_transicao):
     #q1
     tabela_transicao.loc["q1", :]= 'q1'
     tabela_transicao.at["q1", '"']= 'TK_CADEIA'
-    tabela_transicao.at["q1", '\n']= pd.NaN
+    tabela_transicao.at["q1", '\n']= None
     #q2
     tabela_transicao.loc["q2", 'a':'z']= 'q3'
     #q3
@@ -103,7 +103,7 @@ def preencher_tabela(tabela_transicao):
     tabela_transicao.loc["q12", '0':'9']= 'q12'
     tabela_transicao.loc["q12", 'A':'F']= 'q12'
     tabela_transicao.loc["q12", 'G':'z']= 'TK_NUMERO'
-    tabela_transicao.at["q12", '(':]= 'TK_NUMERO'
+    tabela_transicao.loc["q12", '(':]= 'TK_NUMERO'
     #q13
     tabela_transicao.loc["q13", '0':'9']= 'q14'
     tabela_transicao.loc["q13", 'A':'F']= 'q14'
@@ -111,7 +111,7 @@ def preencher_tabela(tabela_transicao):
     tabela_transicao.loc["q14", '0':'9']= 'q14'
     tabela_transicao.loc["q14", 'A':'F']= 'q14'
     tabela_transicao.loc["q14", 'G':'z']= 'TK_NUMERO'
-    tabela_transicao.at["q14", '(':]= 'TK_NUMERO'
+    tabela_transicao.loc["q14", '(':]= 'TK_NUMERO'
     tabela_transicao.at["q14", 'e']= 'q10'
     #q15
     tabela_transicao.at["q15", '='] = "TK_OP_ATRIBUICAO"
@@ -122,7 +122,7 @@ def preencher_tabela(tabela_transicao):
     #q18
     tabela_transicao.at["q18", "'"] = "q19"
     #q19
-    tabela_transicao.at["q19", :] = "q19"
+    tabela_transicao.loc["q19", :] = "q19"
     tabela_transicao.at["q19", "'"] = "q20"
     tabela_transicao.at["q19", "\n"] = "q25"
     #q20
@@ -153,7 +153,7 @@ def gerar_tabela():
     inputs = gerar_inputs()
     tabela_transicao = criar_tabela(inputs, estados)
     preencher_tabela(tabela_transicao)
-    # gerar_csv(tabela_transicao)
+    gerar_csv(tabela_transicao)
     return tabela_transicao, estados_acc
 
 
