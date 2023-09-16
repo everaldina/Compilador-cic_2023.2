@@ -7,14 +7,13 @@ def gerar_tbl_simb():
     tbl_simb = pd.DataFrame(columns=cols)
     return tbl_simb
 
-def att_cursor(cursor, char, retroceder=False):
-    if(not retroceder):
-        cursor["posicao"] += 1
-        if(char != '\n'):
-            cursor["coluna"] +=1
-        else:
-            cursor["coluna"] = 1
-            cursor["linha"] += 1
+def att_cursor(cursor, char):
+    cursor["posicao"] += 1
+    if(char != '\n'):
+        cursor["coluna"] +=1
+    else:
+        cursor["coluna"] = 1
+        cursor["linha"] += 1
     return cursor
 
 def scanner(nome_arq):
@@ -60,21 +59,14 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
         if char not in input:
             char = 'outro'
         estado_att = tbl_transicao.at[estado_att, char]
-        if(estado_att != 'q0'):
+        if(estado_att != 'q0' and estado_att not in lista_retroceder):
             lexema = lexema + char
-        posicao = att_cursor(posicao, char)
+        if(estado_att not in lista_retroceder):
+            posicao = att_cursor(posicao, char)
         if(estado_att == None):
             return estado_att, None, posicao
-        if (estado_att in estados_acc) and (estado_att not in lista_retroceder):
-            return estado_att, lexema, posicao
-        elif (estado_att in estados_acc):
-            lexema = lexema[:len(lexema)-1]
-            posicao["posicao"]-=1
-            if(char == '\n'):
-                posicao["coluna"]=1
-                posicao["linha"]-=1
-            else:
-                posicao["coluna"]-=1
+        if (estado_att in lista_retroceder):
+            #lexema = lexema[:len(lexema)-1]
             arquivo.seek(posicao["posicao"]) #retroceder o arquivo
             if estado_att == 'TK_RESERVADA':
                 if lexema in palavra_rsv:
@@ -83,6 +75,8 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
                     return None, None, posicao
             else:
                 return estado_att, lexema, posicao
+        elif estado_att in estados_acc:
+            return estado_att, lexema, posicao
             
 fim = scanner('ex1.cic')
 fim.to_csv("v2.csv", sep=";", index=True, header=True)
