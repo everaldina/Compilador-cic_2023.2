@@ -7,14 +7,14 @@ def gerar_tbl_simb():
     tbl_simb = pd.DataFrame(columns=cols)
     return tbl_simb
 
-def att_cursor(cursor, char):
-    cursor["posicao"] += 1
-    if(char != '\n'):
-        cursor["coluna"] +=1
-    else:
-        cursor["coluna"] = 1
-        cursor["linha"] += 1
-    return cursor
+def att_cursor(cursor, char, retroceder = False):
+    if(not retroceder):
+        cursor["posicao"] += 1
+        if(char != '\n'):
+            cursor["coluna"] +=1
+        else:
+            cursor["coluna"] = 1
+            cursor["linha"] += 1
 
 def scanner(nome_arq):
     tbl_transicao, estados_acc = gt.gerar_tabela()
@@ -24,12 +24,12 @@ def scanner(nome_arq):
     arquivo = open(nome_arq, 'r')
     
     while(1):
-        token, lexema, nova_posicao = get_token(arquivo, cursor, tbl_transicao, estados_acc)
+        old_cursor = cursor.copy()
+        token, lexema = get_token(arquivo, cursor, tbl_transicao, estados_acc)
         if(token == 'EOF'):
             break
-        if(token != 'TK_COMENTARIO' and token != None):
-            add_token(tbl_simbolos, cursor, lexema, token)
-        cursor = nova_posicao
+        if(token != 'TK_COMENTARIO' and token != None and token != 'q0'):
+            add_token(tbl_simbolos, old_cursor, lexema, token)
     arquivo.close()
     return tbl_simbolos
 
@@ -55,31 +55,35 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
     while(1):
         char = arquivo.read(1)
         if not char:
-            return 'EOF', None, None
+            return 'EOF', None
         if char not in input:
             char = 'outro'
         estado_att = tbl_transicao.at[estado_att, char]
-        if(estado_att != 'q0' and estado_att not in lista_retroceder):
-            lexema = lexema + char
         if(estado_att not in lista_retroceder):
-            posicao = att_cursor(posicao, char)
+            att_cursor(posicao, char)
+        else:
+            att_cursor(posicao, char, retroceder = True)
+        if(estado_att != 'q0'):
+            lexema = lexema + char
+        else:
+            return estado_att,'q0'
         if(estado_att == None):
-            return estado_att, None, posicao
+            return estado_att, None
         if (estado_att in lista_retroceder):
-            #lexema = lexema[:len(lexema)-1]
+            lexema = lexema[:len(lexema)-1]
             arquivo.seek(posicao["posicao"]) #retroceder o arquivo
             if estado_att == 'TK_RESERVADA':
                 if lexema in palavra_rsv:
-                    return dic_rsv[lexema], lexema, posicao       
+                    return dic_rsv[lexema], lexema       
                 else:
-                    return None, None, posicao
+                    return None, None
             else:
-                return estado_att, lexema, posicao
+                return estado_att, lexema
         elif estado_att in estados_acc:
-            return estado_att, lexema, posicao
+            return estado_att, lexema
             
 fim = scanner('ex1.cic')
-fim.to_csv("v2.csv", sep=";", index=True, header=True)
+fim.to_csv("saida.csv", sep=";", index=True, header=True)
 print(fim)
 
 
