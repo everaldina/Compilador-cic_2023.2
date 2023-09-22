@@ -73,8 +73,8 @@ def preencher_tabela(tabela_transicao):
     #q3
     tabela_transicao.loc["q3", 'A':'Z']= 'TK_RESERVADA'
     tabela_transicao.loc["q3", 'a':'z']= 'q3'
-    tabela_transicao.at["q3", '_']= 'q3'
     tabela_transicao.loc["q3", '0':'outro']= 'TK_RESERVADA'
+    tabela_transicao.at["q3", '_']= 'q3'
     #q4
     tabela_transicao.loc["q4", :]= 'TK_OP_MAIOR'
     tabela_transicao.at["q4", '=']= 'TK_OP_GE'

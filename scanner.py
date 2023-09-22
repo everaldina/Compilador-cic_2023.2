@@ -59,10 +59,12 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
         if char not in input:
             char = 'outro'
         estado_att = tbl_transicao.at[estado_att, char]
+
         if(estado_att not in lista_retroceder):
             att_cursor(posicao, char)
         else:
             att_cursor(posicao, char, retroceder = True)
+        
         if(estado_att != 'q0'):
             lexema = lexema + char
         else:
