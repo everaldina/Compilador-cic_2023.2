@@ -1,11 +1,16 @@
 import pandas as pd
 import gerar_tabela as gt
-
+import erros
 
 def gerar_tbl_simb():
     cols = ['posicao', 'linha', 'coluna', 'lexema', 'token']
     tbl_simb = pd.DataFrame(columns=cols)
     return tbl_simb
+
+def gerar_tbl_erro():
+    cols = ['posicao', 'linha', 'coluna', 'mensagem']
+    tbl_erro = pd.DataFrame(columns=cols)
+    return tbl_erro
 
 def att_cursor(cursor, char, retroceder = False):
     if(not retroceder):
@@ -20,18 +25,23 @@ def scanner(nome_arq):
     tbl_transicao, estados_acc = gt.gerar_tabela()
     tbl_simbolos = gerar_tbl_simb()
     cursor = {"posicao": 0, "linha": 1, "coluna": 1}
+    tbl_erros = gerar_tbl_erro()
     
     arquivo = open(nome_arq, 'r')
     
     while(1):
         old_cursor = cursor.copy()
-        token, lexema = get_token(arquivo, cursor, tbl_transicao, estados_acc)
+        token, lexema, char = get_token(arquivo, cursor, tbl_transicao, estados_acc)
         if(token == 'EOF'):
             break
-        if(token != 'TK_COMENTARIO' and token != None and token != 'q0'):
+        elif(token == None):
+            #mensagem_erro = erros.get_erro(estado_anterior, char)
+            #add_erro(tbl_erros, old_cursor, mensagem_erro)
+            add_erro(tbl_erros, old_cursor)
+        elif(token != 'TK_COMENTARIO' and token != None and token != 'q0'):
             add_token(tbl_simbolos, old_cursor, lexema, token)
     arquivo.close()
-    return tbl_simbolos
+    return tbl_simbolos, tbl_erros
 
 def add_token(tabela, posicao, lexema, token):
     distintos = ["TK_ID", "TK_NUMERO", "TK_CADEIA", "TK_MOEDA"]
@@ -39,7 +49,10 @@ def add_token(tabela, posicao, lexema, token):
         tabela.loc[len(tabela)] = [posicao["posicao"], posicao["linha"], posicao["coluna"], lexema, token]
     else:
         tabela.loc[len(tabela)] = [posicao["posicao"], posicao["linha"], posicao["coluna"], None , token]
-    return tabela
+
+# def add_erro(tabela, posicao, mensagem):
+def add_erro(tabela, posicao):
+    tabela.loc[len(tabela)] = [posicao["posicao"], posicao["linha"], posicao["coluna"], None]
 
 def get_token(arquivo, posicao, tbl_transicao, estados_acc):
     lexema = ''
@@ -55,38 +68,45 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
     while(1):
         char = arquivo.read(1)
         if not char:
-            return 'EOF', None
+            return 'EOF', None, None
         if char not in input:
             char = 'outro'
-        estado_att = tbl_transicao.at[estado_att, char]
+                    
+        aux = tbl_transicao.at[estado_att, char]
 
-        if(estado_att not in lista_retroceder):
+        if(aux not in lista_retroceder):
             att_cursor(posicao, char)
         else:
             att_cursor(posicao, char, retroceder = True)
+
+        if(aux == None):
+            return None, estado_att, char
+        
+        estado_att = aux
         
         if(estado_att != 'q0'):
             lexema = lexema + char
         else:
-            return estado_att,'q0'
-        if(estado_att == None):
-            return estado_att, None
+            return estado_att,'q0', None
+        
         if (estado_att in lista_retroceder):
             lexema = lexema[:len(lexema)-1]
             arquivo.seek(posicao["posicao"]) #retroceder o arquivo
             if estado_att == 'TK_RESERVADA':
                 if lexema in palavra_rsv:
-                    return dic_rsv[lexema], lexema       
+                    return dic_rsv[lexema], lexema, None   
                 else:
-                    return None, None
+                    return None, 'q3', char
             else:
-                return estado_att, lexema
+                return estado_att, lexema, None
         elif estado_att in estados_acc:
-            return estado_att, lexema
+            return estado_att, lexema, None
             
-fim = scanner('ex1.cic')
-fim.to_csv("saida.csv", sep=";", index=True, header=True)
-print(fim)
+tbl_tokens, tbl_erro = scanner("ex3.cic")
+tbl_tokens.to_csv("tokens3.csv", sep=";", index=True, header=True)
+tbl_erro.to_csv("erros3.csv", sep=";", index=True, header=True)
+print(tbl_tokens)
+print(tbl_erro)
 
 
     
