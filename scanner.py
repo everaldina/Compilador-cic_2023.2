@@ -35,11 +35,12 @@ def scanner(nome_arq):
         if(token == 'EOF'):
             break
         elif(token == None):
-            #mensagem_erro = erros.get_erro(estado_anterior, char)
-            #add_erro(tbl_erros, old_cursor, mensagem_erro)
-            add_erro(tbl_erros, old_cursor)
+            mensagem_erro = erros.get_erro(lexema, char)
+            add_erro(tbl_erros, old_cursor, mensagem_erro)
         elif(token != 'TK_COMENTARIO' and token != None and token != 'q0'):
             add_token(tbl_simbolos, old_cursor, lexema, token)
+    
+    
     arquivo.close()
     return tbl_simbolos, tbl_erros
 
@@ -51,8 +52,8 @@ def add_token(tabela, posicao, lexema, token):
         tabela.loc[len(tabela)] = [posicao["posicao"], posicao["linha"], posicao["coluna"], None , token]
 
 # def add_erro(tabela, posicao, mensagem):
-def add_erro(tabela, posicao):
-    tabela.loc[len(tabela)] = [posicao["posicao"], posicao["linha"], posicao["coluna"], None]
+def add_erro(tabela, posicao, mensagem):
+    tabela.loc[len(tabela)] = [posicao["posicao"], posicao["linha"], posicao["coluna"], mensagem]
 
 def get_token(arquivo, posicao, tbl_transicao, estados_acc):
     lexema = ''
@@ -68,7 +69,7 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
     while(1):
         char = arquivo.read(1)
         if not char:
-            return 'EOF', None, None
+            return 'EOF', estado_att, None
         if char not in input:
             char = 'outro'
                     
@@ -102,9 +103,9 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
         elif estado_att in estados_acc:
             return estado_att, lexema, None
             
-tbl_tokens, tbl_erro = scanner("ex3.cic")
-tbl_tokens.to_csv("tokens3.csv", sep=";", index=True, header=True)
-tbl_erro.to_csv("erros3.csv", sep=";", index=True, header=True)
+tbl_tokens, tbl_erro = scanner("ex2.cic")
+#tbl_tokens.to_csv("tokens3.csv", sep=";", index=True, header=True)
+#tbl_erro.to_csv("erros3.csv", sep=";", index=True, header=True)
 print(tbl_tokens)
 print(tbl_erro)
 
