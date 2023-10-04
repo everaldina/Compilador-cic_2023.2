@@ -19,6 +19,8 @@ def att_cursor(cursor, char):
     else:
         cursor["coluna"] = 1
         cursor["linha"] += 1
+        
+
 
 def scanner(nome_arq):
     tbl_transicao, estados_acc = gt.gerar_tabela()
@@ -31,8 +33,13 @@ def scanner(nome_arq):
     while(1):
         old_cursor = cursor.copy()
         token, lexema, char = get_token(arquivo, cursor, tbl_transicao, estados_acc)
-        if(token == 'EOF'):
+        if(token == 'EOF' and not erros.check_erro_coment(lexema)):
             break
+        elif(token == 'EOF'):
+            mensagem_erro = erros.get_erro(lexema, char)
+            add_erro(tbl_erros, old_cursor, mensagem_erro)
+            erros.trat_erro_coment(arquivo, old_cursor)
+            cursor = old_cursor.copy()
         elif(token == None):
             mensagem_erro = erros.get_erro(lexema, char)
             add_erro(tbl_erros, old_cursor, mensagem_erro)
@@ -98,11 +105,11 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
         elif estado_att in estados_acc:
             return estado_att, lexema, None
             
-#tbl_tokens, tbl_erro = scanner("ex2.cic")
+tbl_tokens, tbl_erro, cursor = scanner("ex3.cic")
 #tbl_tokens.to_csv("tokens3.csv", sep=";", index=True, header=True)
 #tbl_erro.to_csv("erros3.csv", sep=";", index=True, header=True)
-#print(tbl_tokens)
-#print(tbl_erro)
+print(tbl_tokens)
+print(tbl_erro)
 
 
     
