@@ -23,7 +23,6 @@ disc_mensagem = {"ERR_CADEIA_FORMAT": "Cadeia mal formatada.",
 
 
 def get_erro(estado_att, char):
-    print(estado_att, char)
     if estado_att in ERR_CADEIA:
         return disc_mensagem["ERR_CADEIA_FORMAT"]
     elif estado_att in ERR_NUM_FORMAT:

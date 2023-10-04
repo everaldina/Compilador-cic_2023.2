@@ -39,10 +39,8 @@ def scanner(nome_arq):
             add_erro(tbl_erros, old_cursor, mensagem_erro)
         elif(token != 'TK_COMENTARIO' and token != None and token != 'q0'):
             add_token(tbl_simbolos, old_cursor, lexema, token)
-    
-    
     arquivo.close()
-    return tbl_simbolos, tbl_erros
+    return tbl_simbolos, tbl_erros, cursor
 
 def add_token(tabela, posicao, lexema, token):
     distintos = ["TK_ID", "TK_NUMERO", "TK_CADEIA", "TK_MOEDA"]
@@ -103,11 +101,11 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
         elif estado_att in estados_acc:
             return estado_att, lexema, None
             
-tbl_tokens, tbl_erro = scanner("ex2.cic")
+#tbl_tokens, tbl_erro = scanner("ex2.cic")
 #tbl_tokens.to_csv("tokens3.csv", sep=";", index=True, header=True)
 #tbl_erro.to_csv("erros3.csv", sep=";", index=True, header=True)
-print(tbl_tokens)
-print(tbl_erro)
+#print(tbl_tokens)
+#print(tbl_erro)
 
 
     
