@@ -12,14 +12,13 @@ def gerar_tbl_erro():
     tbl_erro = pd.DataFrame(columns=cols)
     return tbl_erro
 
-def att_cursor(cursor, char, retroceder = False):
-    if(not retroceder):
-        cursor["posicao"] += 1
-        if(char != '\n'):
-            cursor["coluna"] +=1
-        else:
-            cursor["coluna"] = 1
-            cursor["linha"] += 1
+def att_cursor(cursor, char):
+    cursor["posicao"] += 1
+    if(char != '\n'):
+        cursor["coluna"] +=1
+    else:
+        cursor["coluna"] = 1
+        cursor["linha"] += 1
 
 def scanner(nome_arq):
     tbl_transicao, estados_acc = gt.gerar_tabela()
@@ -75,8 +74,6 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
 
         if(aux not in lista_retroceder):
             att_cursor(posicao, char)
-        else:
-            att_cursor(posicao, char, retroceder = True)
 
         if(aux == None):
             return None, estado_att, char
