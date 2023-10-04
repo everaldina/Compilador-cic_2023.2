@@ -105,11 +105,11 @@ def get_token(arquivo, posicao, tbl_transicao, estados_acc):
         elif estado_att in estados_acc:
             return estado_att, lexema, None
             
-tbl_tokens, tbl_erro, cursor = scanner("ex3.cic")
+#tbl_tokens, tbl_erro, cursor = scanner("ex3.cic")
 #tbl_tokens.to_csv("tokens3.csv", sep=";", index=True, header=True)
 #tbl_erro.to_csv("erros3.csv", sep=";", index=True, header=True)
-print(tbl_tokens)
-print(tbl_erro)
+#print(tbl_tokens)
+#print(tbl_erro)
 
 
     

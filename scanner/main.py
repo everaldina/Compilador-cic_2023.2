@@ -75,4 +75,4 @@ def saida_codigo_fonte(nome_arquivo, tbl_erros, count_linhas, nome_saida):
                         if pos_err >= len(tbl_erros):
                             break
       
-main("ex2.cic")
+main("ex3.cic")
