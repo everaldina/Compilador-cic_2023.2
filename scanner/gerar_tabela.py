@@ -155,7 +155,7 @@ def gerar_tabela():
     inputs = gerar_inputs()
     tabela_transicao = criar_tabela(inputs, estados)
     preencher_tabela(tabela_transicao)
-    gerar_csv(tabela_transicao)
+    #gerar_csv(tabela_transicao)
     return tabela_transicao, estados_acc
 
 
