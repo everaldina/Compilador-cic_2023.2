@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-
+# gera lista de estados
 def gerar_estados():
     ### iniciando lista com estados
     #tokens
@@ -17,12 +17,16 @@ def gerar_estados():
         estados.append('q'+ str(x))
     return [estados, estados_acc]
 
+# gera lista de inputs
 def gerar_inputs():
     inputs = []
+    # A-Z
     for x in range(ord('A'), ord('Z')+1):
         inputs.append(chr(x))
+    # a-z
     for x in range(ord('a'), ord('z')+1):
         inputs.append(chr(x))
+    # 0-9
     for x in range(0, 10):
         inputs.append(str(x))
     inputs.extend(["(", ")", ",", "+", "-", "*", "/", ">", "<", "=", "!", "_",
@@ -30,13 +34,13 @@ def gerar_inputs():
                 "outro"])
     return inputs
 
-
+# cria tabela de transicao
 def criar_tabela(inputs, estados):
     data = [[None] * len(inputs) for _ in range(len(estados))]
     tabela_transicao = pd.DataFrame(data, index=estados, columns=inputs)
     return tabela_transicao
 
-
+# preenche tabela de transição
 def preencher_tabela(tabela_transicao):
     #q0
     tabela_transicao.at['q0', '\t'] = 'q0'
@@ -147,9 +151,11 @@ def preencher_tabela(tabela_transicao):
     tabela_transicao.loc["q25", "a":"9"] = "q25"
     tabela_transicao.at["q25", ">"] = "TK_ID"
 
+# gera um csv da tabela de transição
 def gerar_csv(tabela):
     tabela.to_csv("tabela_transicao.csv", sep=";", index=True, header=True)
 
+# gera tabela de transição e a preenche
 def gerar_tabela():
     estados, estados_acc = gerar_estados()
     inputs = gerar_inputs()

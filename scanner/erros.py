@@ -1,4 +1,7 @@
+# retorna mensagem de erro dado ultimo estado e caractere lida
 def get_erro(estado_att, char):
+
+    # estados de cada erro
     ERR_CADEIA = ["q1"]
     ERR_NUM_FORMAT = ["q10"]
     ERR_FLOAT_FORMAT = ["q14", "q15"]
@@ -10,6 +13,7 @@ def get_erro(estado_att, char):
     ERR_COMENT_FORMAT = ["q18", "q19"]
     ERR_COMENT_ABERTO = ["q20", "q21", "q22"]
 
+    # dicionario com codigos e mensagens de erro
     disc_mensagem = {"ERR_CADEIA_FORMAT": "Cadeia mal formatada.",
                     "ERR_NUM_FORMAT": "Numero mal formatado.", 
                     "ERR_FLOAT_FORMAT": "Numero flaot mal formatado.",
@@ -22,6 +26,7 @@ def get_erro(estado_att, char):
                     "ERR_COMENT_ABERTO": "Comentario nao fechado.",
                     "ERR_LEXICO": "Erro lexico."}
 
+    # de avordo a estado e char retorna mensagem de erro
     if estado_att in ERR_CADEIA:
         return disc_mensagem["ERR_CADEIA_FORMAT"]
     elif estado_att in ERR_NUM_FORMAT:
@@ -46,6 +51,7 @@ def get_erro(estado_att, char):
     else:
         return disc_mensagem["ERR_LEXICO"]
 
+# checa se ouve um erro de comentario aberto
 def check_erro_coment(estado_att):
     estados_erro = ["q20", "q21", "q22"]
     if estado_att in estados_erro:
@@ -53,12 +59,16 @@ def check_erro_coment(estado_att):
     else:
         return False
     
-
+# trata erro de comentario aberto
 def trat_erro_coment(arquivo, cursor):
+    # coluna vai ser reiniciada e linha vai ser incrementada
     cursor["coluna"] = 1
     cursor["linha"] += 1
     
+    # volta cursor para onde se iniciou o comentario
     arquivo.seek(cursor["posicao"])
+
+    # le caractere e atualiza posicao ate achar uma quebra de linha
     char = arquivo.read(1)
     cursor["posicao"] += 1
     while(char != '\n'):
