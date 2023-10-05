@@ -1,0 +1,8 @@
+[1]  # Ex-01-correto.cic
+[2]  
+[3]  programa
+[4]      imprima("Digite um nro")
+[5]      leia(<numero>)
+[6]      <soma> := <a> + 8D.3
+[7]      imprima(<raiz>) 	
+[8]  fim_programa

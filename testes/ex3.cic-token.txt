@@ -1,0 +1,27 @@
++-----------------------------------------------------------------------+
+|                            Tabela de Tokens                           |
++-----------------------------------------------------------------------+
+| Linha   | Coluna  | Token               | Lexema                      |
++-----------------------------------------------------------------------+
+| 4       | 5       | TK_LEIA             |                             |
+| 4       | 9       | TK_ABRE_PARENTESE   |                             |
+| 4       | 10      | TK_ID               | <a>                         |
+| 4       | 13      | TK_FECHA_PARENTESE  |                             |
+| 5       | 5       | TK_ID               | <soma>                      |
+| 5       | 12      | TK_OP_ATRIBUICAO    |                             |
+| 5       | 15      | TK_ID               | <a>                         |
+| 5       | 19      | TK_OP_SOMA          |                             |
+| 5       | 21      | TK_MOEDA            | R$23.34                     |
+| 6       | 5       | TK_SE               |                             |
+| 6       | 8       | TK_ID               | <a>                         |
+| 6       | 12      | TK_OP_LE            |                             |
+| 6       | 15      | TK_ID               | <b>                         |
+| 7       | 9       | TK_IMPRIMA          |                             |
+| 7       | 16      | TK_ABRE_PARENTESE   |                             |
+| 7       | 17      | TK_NUMERO           | 34F.34e23A                  |
+| 7       | 27      | TK_FECHA_PARENTESE  |                             |
+| 8       | 5       | TK_IMPRIMA          |                             |
+| 8       | 12      | TK_ABRE_PARENTESE   |                             |
+| 8       | 13      | TK_CADEIA           | "Fim prog"                  |
+| 9       | 1       | TK_FPROG            |                             |
++-----------------------------------------------------------------------+

@@ -1,0 +1,18 @@
++----------------------------------+
+|         Contagem de Tokens       |
++----------------------------------+
+| Token               | Quantidade |
++----------------------------------+
+| TK_ABRE_PARENTESE   | 3          |
+| TK_ID               | 3          |
+| TK_IMPRIMA          | 2          |
+| TK_FECHA_PARENTESE  | 2          |
+| TK_PROG             | 1          |
+| TK_LEIA             | 1          |
+| TK_OP_MENOR         | 1          |
+| TK_NUMERO           | 1          |
+| TK_OP_MAIOR         | 1          |
+| TK_OP_ATRIBUICAO    | 1          |
+| TK_OP_SOMA          | 1          |
+| TK_FPROG            | 1          |
++----------------------------------+

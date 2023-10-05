@@ -1,0 +1,14 @@
+[ 1]  # Ex-02-incorreto.cic
+[ 2]  
+[ 3]  programa
+[ 4]      imprima("Digite um 
+                  ^-- Erro (ln 4, col 13): Cadeia mal formatada.
+[ 5]      nro")
+          ^-- Erro (ln 5, col 5): Palavra nao reservada.
+             ^-- Erro (ln 5, col 8): Cadeia mal formatada.
+[ 6]      leia(<1num>)
+                 ^-- Erro (ln 6, col 12): Palavra nao reservada.
+[ 7]      <soma> := <a> + R$23.3 
+                          ^-- Erro (ln 7, col 21): Moeda mal formatada.
+[ 8]      imprima(<raiz>) 	
+[ 9]  fim_programa

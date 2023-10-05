@@ -1,0 +1,18 @@
+[ 1]  ''' Ex-03-incorreto.cic
+      ^-- Erro (ln 1, col 1): Comentario nao fechado.
+[ 2]  
+[ 3]  Programa
+      ^-- Erro (ln 3, col 1): Erro lexico.
+        ^-- Erro (ln 3, col 3): Palavra nao reservada.
+[ 4]      leia(<a>)
+[ 5]      <soma> := <a> + R$23.34
+[ 6]      se <a> <= <b> então
+                        ^-- Erro (ln 6, col 19): Palavra nao reservada.
+                           ^-- Erro (ln 6, col 22): Erro lexico.
+                            ^-- Erro (ln 6, col 23): Erro lexico.
+                             ^-- Erro (ln 6, col 24): Palavra nao reservada.
+[ 7]          imprima(34F.34e23A)
+[ 8]      imprima("Fim prog"rama") 	
+                            ^-- Erro (ln 8, col 23): Palavra nao reservada.
+                                ^-- Erro (ln 8, col 27): Cadeia mal formatada.
+[ 9]  fim_programa

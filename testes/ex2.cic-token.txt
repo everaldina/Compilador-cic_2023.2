@@ -1,0 +1,24 @@
++-----------------------------------------------------------------------+
+|                            Tabela de Tokens                           |
++-----------------------------------------------------------------------+
+| Linha   | Coluna  | Token               | Lexema                      |
++-----------------------------------------------------------------------+
+| 3       | 1       | TK_PROG             |                             |
+| 4       | 5       | TK_IMPRIMA          |                             |
+| 4       | 12      | TK_ABRE_PARENTESE   |                             |
+| 6       | 5       | TK_LEIA             |                             |
+| 6       | 9       | TK_ABRE_PARENTESE   |                             |
+| 6       | 10      | TK_OP_MENOR         |                             |
+| 6       | 11      | TK_NUMERO           | 1                           |
+| 6       | 15      | TK_OP_MAIOR         |                             |
+| 6       | 16      | TK_FECHA_PARENTESE  |                             |
+| 7       | 5       | TK_ID               | <soma>                      |
+| 7       | 12      | TK_OP_ATRIBUICAO    |                             |
+| 7       | 15      | TK_ID               | <a>                         |
+| 7       | 19      | TK_OP_SOMA          |                             |
+| 8       | 5       | TK_IMPRIMA          |                             |
+| 8       | 12      | TK_ABRE_PARENTESE   |                             |
+| 8       | 13      | TK_ID               | <raiz>                      |
+| 8       | 19      | TK_FECHA_PARENTESE  |                             |
+| 9       | 1       | TK_FPROG            |                             |
++-----------------------------------------------------------------------+
