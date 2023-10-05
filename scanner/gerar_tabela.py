@@ -44,9 +44,9 @@ def preencher_tabela(tabela_transicao):
     tabela_transicao.at['q0', ' '] = 'q0'
     tabela_transicao.at["q0", '"']= 'q1'
     tabela_transicao.loc["q0", "a": "z"]= 'q2'
-    tabela_transicao.loc["q0", 'A':'F']= 'q9'
+    tabela_transicao.loc["q0", 'A':'F']= 'q10'
     tabela_transicao.loc["q0", 'G':'Z']= 'q5'
-    tabela_transicao.loc["q0", '0':'9']= 'q9'
+    tabela_transicao.loc["q0", '0':'9']= 'q10'
     tabela_transicao.at["q0", '|']= 'TK_OP_OU'
     tabela_transicao.at["q0", '&']= 'TK_OP_E'
     tabela_transicao.at["q0", '~']= 'TK_OP_NEGACAO'
@@ -58,12 +58,12 @@ def preencher_tabela(tabela_transicao):
     tabela_transicao.at["q0", '*']= 'TK_OP_MULT'
     tabela_transicao.at["q0", '/']= 'TK_OP_DIV'
     tabela_transicao.at["q0", '=']= 'TK_OP_IGUAL'
-    tabela_transicao.at["q0", ':']= 'q15'
-    tabela_transicao.at["q0", '!']= 'q16'
-    tabela_transicao.at["q0", '<']= 'q23'
+    tabela_transicao.at["q0", ':']= 'q16'
+    tabela_transicao.at["q0", '!']= 'q17'
+    tabela_transicao.at["q0", '<']= 'q24'
     tabela_transicao.at["q0", '>']= 'q4'
-    tabela_transicao.at["q0", '#']= 'q22'
-    tabela_transicao.at["q0", "'"]= 'q17'
+    tabela_transicao.at["q0", '#']= 'q23'
+    tabela_transicao.at["q0", "'"]= 'q18'
     #q1
     tabela_transicao.loc["q1", :]= 'q1'
     tabela_transicao.at["q1", '"']= 'TK_CADEIA'
@@ -81,70 +81,71 @@ def preencher_tabela(tabela_transicao):
     #q5
     tabela_transicao.at["q5", '$']= 'q6'
     #q6
-    tabela_transicao.loc["q6", '0':'9']= 'q6'
-    tabela_transicao.at["q6", '.']= 'q7'
+    tabela_transicao.loc["q6", '0':'9']= 'q7'
     #q7
-    tabela_transicao.loc["q7", '0':'9']= 'q8'
+    tabela_transicao.loc["q7", '0':'9']= 'q7'
+    tabela_transicao.at["q7", '.']= 'q8'
     #q8
-    tabela_transicao.loc["q8", '0':'9']= 'TK_MOEDA'
+    tabela_transicao.loc["q8", '0':'9']= 'q9'
     #q9
-    tabela_transicao.loc["q9", '0':'9']= 'q9'
-    tabela_transicao.loc["q9", 'A':'F']= 'q9'
-    tabela_transicao.at["q9", '$']= 'q6'
-    tabela_transicao.at["q9", 'e']= 'q10'
-    tabela_transicao.at["q9", '.']= 'q13'
+    tabela_transicao.loc["q9", '0':'9']= 'TK_MOEDA'
     #q10
-    tabela_transicao.loc["q10", '0':'9']= 'q12'
-    tabela_transicao.loc["q10", 'A':'F']= 'q12'
-    tabela_transicao.at["q10", '-']= 'q11'
+    tabela_transicao.loc["q10", '0':'9']= 'q10'
+    tabela_transicao.loc["q10", 'A':'F']= 'q10'
+    tabela_transicao.loc["q10", 'G':'d']= 'TK_NUMERO'
+    tabela_transicao.at["q10", 'e']= 'q11'
+    tabela_transicao.loc["q10", 'f':'z']= 'TK_NUMERO'
+    tabela_transicao.loc["q10", '(':]= 'TK_NUMERO'
+    tabela_transicao.at["q10", '$']= 'q6'
+    tabela_transicao.at["q10", '.']= 'q14'
     #q11
-    tabela_transicao.loc["q11", '0':'9']= 'q12'
-    tabela_transicao.loc["q11", 'A':'F']= 'q12'
+    tabela_transicao.loc["q11", '0':'9']= 'q13'
+    tabela_transicao.loc["q11", 'A':'F']= 'q13'
+    tabela_transicao.at["q11", '-']= 'q12'
     #q12
-    tabela_transicao.loc["q12", '0':'9']= 'q12'
-    tabela_transicao.loc["q12", 'A':'F']= 'q12'
-    tabela_transicao.loc["q12", 'G':'z']= 'TK_NUMERO'
-    tabela_transicao.loc["q12", '(':]= 'TK_NUMERO'
+    tabela_transicao.loc["q12", '0':'9']= 'q13'
+    tabela_transicao.loc["q12", 'A':'F']= 'q13'
     #q13
-    tabela_transicao.loc["q13", '0':'9']= 'q14'
-    tabela_transicao.loc["q13", 'A':'F']= 'q14'
+    tabela_transicao.loc["q13", '0':'9']= 'q13'
+    tabela_transicao.loc["q13", 'A':'F']= 'q13'
+    tabela_transicao.loc["q13", 'G':'z']= 'TK_NUMERO'
+    tabela_transicao.loc["q13", '(':]= 'TK_NUMERO'
     #q14
-    tabela_transicao.loc["q14", '0':'9']= 'q14'
-    tabela_transicao.loc["q14", 'A':'F']= 'q14'
-    tabela_transicao.loc["q14", 'G':'z']= 'TK_NUMERO'
-    tabela_transicao.loc["q14", '(':]= 'TK_NUMERO'
-    tabela_transicao.at["q14", 'e']= 'q10'
+    tabela_transicao.loc["q14", '0':'9']= 'q15'
+    tabela_transicao.loc["q14", 'A':'F']= 'q15'
     #q15
-    tabela_transicao.at["q15", '='] = "TK_OP_ATRIBUICAO"
+    tabela_transicao.loc["q15", '0':'9']= 'q15'
+    tabela_transicao.loc["q15", 'A':'F']= 'q15'
+    tabela_transicao.loc["q15", 'G':'z']= 'TK_NUMERO'
+    tabela_transicao.loc["q15", '(':]= 'TK_NUMERO'
+    tabela_transicao.at["q15", 'e']= 'q11'
     #q16
-    tabela_transicao.at["q16", '='] = "TK_OP_DIF"
+    tabela_transicao.at["q16", '='] = "TK_OP_ATRIBUICAO"
     #q17
-    tabela_transicao.at["q17", "'"] = "q18"
+    tabela_transicao.at["q17", '='] = "TK_OP_DIF"
     #q18
     tabela_transicao.at["q18", "'"] = "q19"
     #q19
-    tabela_transicao.loc["q19", :] = "q19"
     tabela_transicao.at["q19", "'"] = "q20"
-    tabela_transicao.at["q19", "\n"] = "q25"
     #q20
-    tabela_transicao.loc["q20", :] = "q19"
+    tabela_transicao.loc["q20", :] = "q20"
     tabela_transicao.at["q20", "'"] = "q21"
     #q21
-    tabela_transicao.loc["q21", :] = "q19"
-    tabela_transicao.at["q21", "'"] = "TK_COMENTARIO"
+    tabela_transicao.loc["q21", :] = "q20"
+    tabela_transicao.at["q21", "'"] = "q22"
     #q22
-    tabela_transicao.loc["q22", :] = "q22"
-    tabela_transicao.at["q22", "\n"] = "TK_COMENTARIO"
+    tabela_transicao.loc["q22", :] = "q20"
+    tabela_transicao.at["q22", "'"] = "TK_COMENTARIO"
     #q23
-    tabela_transicao.loc["q23", :] = "TK_OP_MENOR"
-    tabela_transicao.loc["q23", 'a':'z'] = "q24"
-    tabela_transicao.at["q23", '='] = "TK_OP_LE"
+    tabela_transicao.loc["q23", :] = "q23"
+    tabela_transicao.at["q23", "\n"] = "TK_COMENTARIO"
     #q24
-    tabela_transicao.loc["q24", "a":"9"] = "q24"
-    tabela_transicao.at["q24", ">"] = "TK_ID"
+    tabela_transicao.loc["q24", :] = "TK_OP_MENOR"
+    tabela_transicao.loc["q24", 'a':'z'] = "q25"
+    tabela_transicao.at["q24", '='] = "TK_OP_LE"
     #q25
-    tabela_transicao.loc["q25", :] = "q19"
-    tabela_transicao.at["q25", "'"] = "q20"
+    tabela_transicao.loc["q25", "a":"9"] = "q25"
+    tabela_transicao.at["q25", ">"] = "TK_ID"
 
 def gerar_csv(tabela):
     tabela.to_csv("tabela_transicao.csv", sep=";", index=True, header=True)
