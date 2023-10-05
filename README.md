@@ -97,26 +97,19 @@ TK_ABRE_PARENTESE | (
 TK_FECHA_PARENTESE | )
 TK_VIRGULA | ,
 
-### TK_ID
+### Automato TK_ID
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_ID.png?raw=true)
 ### TK_NUMERO
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_NUMERO.png?raw=true)
 ### TK_MOEDA
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_MOEDA.png?raw=true)
 ### TK_CADEIA
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_CADEIA.png?raw=true)
 ### TK_RESERVADA
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_RESERVADO.png?raw=true)
 ### TK_COMENTARIO
-### TK_OP_GE
-### TK_OP_LE
-### TK_OP_MAIOR 
-### TK_OP_MENOR
-### TK_OP_IGUAL
-### TK_OP_DIF
-### TK_OP_SOMA
-### TK_OP_SUB
-### TK_OP_MULT
-### TK_OP_DIV
-### TK_OP_OU
-### TK_OP_E
-### TK_OP_NEGACAO
-### TK_OP_ATRIBUICAO
-### TK_ABRE_PARENTESE
-### TK_FECHA_PARENTESE
-### TK_VIRGULA
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_COMENTARIO.png?raw=true)
+### TK_OP's
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_OPERACAO.png?raw=true)
+### TD_DELIMITADORES
+![automato id](https://github.com/everaldina/Compilador-cic_2023.2/blob/main/automato/TK_DELIMITADOR.png?raw=true)
